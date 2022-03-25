@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Online Chess
+        </title>
+        <link rel="stylesheet" type="text/css" href="Chess.css"/>
+        <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="Chess.js"></script>
+    </head> 
+    <body style="background-color: #f5f5dc">
+<div class="board">
+</div>
+<h1 class = "FEN_label">FEN</h1>
+<span id="FEN" class = "FEN">rnbqkbnrpppppppp11111111111111111111111111111111PPPPPPPPRNBQKBNR</span>
+<span id = "opening" class = "opening"></span>
+<p id = "info" class = "info"></p>
+<h1 class = "pgn_label">PGN code</h1>
+<span id = "pgn" class = "pgn"></span>
+<div style = "overflow: auto; width:600px; height:300px;overflow-x: hidden;position: absolute;top: 36%;left: 40%;">
+    <span id = "notation" class = "notation">Notation</span>
+</div>
+<form>
+    <input type="button" id="addButton"  value="Play White" size="60">
+</form>
+    </body>
+</html>
