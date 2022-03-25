@@ -1,0 +1,80 @@
+.board {
+    width: 560px;
+    height: 560px;
+    border: 20px solid;
+}
+.square {
+    width: 70px;
+    height: 70px;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.black {
+    background-color: #666;
+}
+.white {
+    background-color: #eee;
+}
+.figure {
+    font-size: 60px;
+    cursor: grab;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.FEN {
+    position: absolute;
+    top: 20%;  
+    left: 50%;
+    color: #333; font-family: 'Rouge Script', cursive; font-size: 16px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-shadow: 1px 1px 2px #082b34; 
+}
+
+.info {
+    position: absolute;
+    top: 69%;
+    left: 5%;
+    color: #003153; font-family: 'Rouge Script', cursive; font-size: 24px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-align: center; text-shadow: 1px 1px 2px #082b34; 
+}
+
+.FEN_label {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    color: #CEF0D4; font-family: 'Rouge Script', cursive; font-size: 70px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-align: center; text-shadow: 1px 1px 2px #082b34; 
+}
+
+.notation {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    font-size: 30px;
+    color: #333; font-family: 'Rouge Script', cursive; font-size: 32px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-shadow: 1px 1px 2px #082b34; 
+    border: 2px solid;
+}
+
+.opening {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    font-size: 30px;
+    color: #d04764; font-family: 'Lobster', cursive; font-size: 36px; font-weight: normal; line-height: 48px; margin: 0 0 18px; text-shadow: 1px 0 0 #fff; 
+}
+
+.pgn {
+    position: absolute;
+    top: 5.5%;
+    left: 50%;
+    font-size: 16px;
+    color: #00fa9a; font-family: 'Rouge Script', cursive; font-size: 16px; font-weight: normal; line-height: 18px; margin: 0 0 18px; text-shadow: 1px 0 0 #fff; 
+}
+
+.pgn_label {
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    color: #007fff; font-family: 'Lobster', cursive; font-size: 24px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-align: center; text-shadow: 1px 1px 2px #082b34; 
+}
