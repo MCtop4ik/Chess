@@ -18,6 +18,7 @@ var II_white = false
 var II_black = false
 var was_figure = "";
 var filer = 0;
+var global_rnd = 0;
 window.onload = init;   
 function init(){
     var button = document.getElementById("addButton")
@@ -25,7 +26,7 @@ function init(){
 }
 
 function handleButtonClick() {
-    alert("Now you are playing with computer with WHITE pieces. Computer plays with black");
+    alert("Now you are playing with computer with BLACK pieces. Computer plays with white");
     II_white = true
 }
 $(function (){
@@ -128,6 +129,8 @@ function findAllWhiteResponces(){
                 if (unfair_moves(rnd, rnd_2) == false){
                     if (rnd != rnd_2){
                         console.log(rnd, rnd_2)
+                        toCoord = rnd_2;
+                        frCoord = rnd;
                         global_figure = map[rnd]
                         moveFigure(rnd, rnd_2)
                         move_was_by_white = false;
@@ -182,15 +185,22 @@ function moveFigure(frCoord, toCoord){
     if (check == 2){
         if (frCoord != toCoord){
             if (getMovePlace(toCoord) != "undefined"){
-                full_info += not_pawn + was_figure + getMovePlace(toCoord) + space + "<br>";
-                forOpenning += not_figure + was_figure + getMovePlace(toCoord) + next;
+                if (II_black != true){
+                    full_info += not_pawn + was_figure + getMovePlace(toCoord) + space + "<br>";
+                    forOpenning += not_figure + was_figure + getMovePlace(toCoord) + next;
+                }
                 check = 1;
                 look += 1;}}
     }else{
         if (frCoord != toCoord){
                     if(getMovePlace(toCoord) != "undefined"){  
-                        full_info += look + "." + not_pawn + was_figure + getMovePlace(toCoord) + space;
-                        forOpenning += look + "." + " " + not_figure + was_figure + getMovePlace(toCoord) + next;
+                        if (II_white != true){
+                            full_info += look + "." + not_pawn + was_figure + getMovePlace(toCoord) + space;
+                            forOpenning += look + "." + " " + not_figure + was_figure + getMovePlace(toCoord) + next;
+                        }else{
+                            full_info += look + "." + not_pawn + was_figure + getMovePlace(toCoord) + space;
+                            forOpenning += look + "." + " " + not_figure + was_figure + getMovePlace(toCoord) + next;
+                        }
                         check += 1;
             }
         }
@@ -219,8 +229,12 @@ function moveFigure(frCoord, toCoord){
     "This is not a very common move because it somewhat weakens the e1-h4 diagonal; its aim is to over-protect the e5 square which later can be occupied by a White Knight. It could also prepare a kingside attack. Black sometimes attempts to stop this plan as early as move one, by responding with e5, the From Gambit. Read more on <a href = 'https://en.wikibooks.org/wiki/Chess_Opening_Theory/1._f4'>Wikipedia</a>",
 "", "", "", "", "", ""]
     videos = ["", "", "", "", ""]
-    document.getElementById('notation').innerHTML = full_info;
-    document.getElementById('opening').innerHTML = save_openning;
+    if (II_white != true){
+        document.getElementById('notation').innerHTML = full_info;
+        document.getElementById('opening').innerHTML = save_openning;
+    }else{
+        document.getElementById('notation').innerHTML = "You play with black pieces";
+    }
     if (info[filer] != "undefined"){
         document.getElementById('info').innerHTML = info[filer];
         filer = 10;
@@ -344,7 +358,12 @@ function isOpening(forOpenning){
     var node = ["1. c4 ", "1. d4 ", "1. d4 Nf6 ", "1. d4 Nf6 2. Nf3 e6 3. Bg5 ", "1. d4 f5 ", "1. e4 ", "1. f4 ", "1. g4 ", "1. h4 ", "1. a4 ", "1. b4 ", "1. a3 ", "1. b3 ", "1. c3 ", "1. d3 ", "1. e3 ", "1. f3 ", "1. g3 ", "1. h3 ", "1. Na3 ", "1. Nc3 ", "1. Nf3 ", "1. Nh3 "];
     var ECO = ["A10	English Opening", "A40	Queen's Pawn Game", "A45 Indian Defense", "A46	Torre Attack", "A80	Dutch Defense", "B00 King's Pawn", "A02 Bird Opening"];
     console.log(forOpenning)
-    document.getElementById('pgn').innerHTML = forOpenning;
+    if (II_white == false){
+        document.getElementById('pgn').innerHTML = forOpenning;
+    }else{
+        document.getElementById('pgn').innerHTML = "You play with bot";
+    }
+
     for (var i = 0; i < node.length; i++){
         if (forOpenning == node[i]){
             filer = i;
@@ -362,8 +381,8 @@ function unfair_moves(frCoord, toCoord){
     last_figure = map[toCoord];
     var x1 = Math.floor(frCoord/8)-1;
     var x2 = Math.floor(toCoord/8)-1;
-    var y1 = (11 - (frCoord) % 8);
-    var y2 = (11 - (toCoord) % 8);
+    var y1 = (8 - (frCoord) % 8);
+    var y2 = (8 - (toCoord) % 8);
     dx = Math.abs(x1 - x2);
     dy = Math.abs(y1 - y2);
     if (global_figure == "Q" || global_figure == "q"){
@@ -376,6 +395,9 @@ function unfair_moves(frCoord, toCoord){
             }else if (global_figure == "Q" && (last_figure == "p"|| last_figure == "n"|| last_figure == "b"|| last_figure == "r"|| last_figure == "q"|| last_figure == "k" || last_figure == "1")){
                 if (map[toCoord] != "1"){
                     was_figure = "x"
+                }
+                if (II_white == true){
+                    return true
                 }
                 return false
             }else{
@@ -395,6 +417,9 @@ function unfair_moves(frCoord, toCoord){
             }else if (global_figure == "B" && (last_figure == "p"|| last_figure == "n"|| last_figure == "b"|| last_figure == "r"|| last_figure == "q"|| last_figure == "k" || last_figure == "1")){
                 if (map[toCoord] != "1"){
                     was_figure = "x"
+                }
+                if (II_white == true){
+                    return true
                 }
                 return false
             }else{
@@ -432,6 +457,22 @@ function unfair_moves(frCoord, toCoord){
                     if (map[toCoord] != "1"){
                         was_figure = "x"
                     }
+                        while(x1 != x2){
+                            if (x1 > x2){
+                                x2 += 1
+                                if (map[x2*7+y2-2] != "1"){
+                                    return true
+                                }
+                            }else{
+                                if (map[x1 * 8 + y1] != "1"){
+                                    return true
+                                }
+                                x1 += 1
+                            }
+                        }
+                        if (II_white == true){
+                            return true
+                        }
                     return false
                 }else{
                     return true
@@ -449,6 +490,9 @@ function unfair_moves(frCoord, toCoord){
                 }else if (global_figure == "K" && (last_figure == "p"|| last_figure == "n"|| last_figure == "b"|| last_figure == "r"|| last_figure == "q"|| last_figure == "k" || last_figure == "1")){
                     if (map[toCoord] != "1"){
                         was_figure = "x"
+                    }
+                    if (II_white == true){
+                        return true
                     }
                     return false
                 }else{
